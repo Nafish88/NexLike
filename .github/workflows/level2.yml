@@ -1,0 +1,43 @@
+name: NexLike Level 2 - Colab Lab Setup
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  level2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Create Level 2 Structure
+        run: |
+          mkdir -p colab launcher
+
+          echo "# NexLike - Colab ComfyUI Lab" > README.md
+          echo "Zero-Money Optimized Image Generation Lab" >> README.md
+          echo "" >> README.md
+          echo "## Run on Google Colab" >> README.md
+          echo "Open colab/comfyui_lab.ipynb and Run All." >> README.md
+
+          echo "#!/bin/bash" > launcher/run_colab.sh
+          echo "git clone https://github.com/comfyanonymous/ComfyUI.git" >> launcher/run_colab.sh
+          echo "cd ComfyUI" >> launcher/run_colab.sh
+          echo "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118" >> launcher/run_colab.sh
+          echo "pip install xformers --no-build-isolation" >> launcher/run_colab.sh
+          echo "pip install -r requirements.txt" >> launcher/run_colab.sh
+          echo "python main.py --listen 0.0.0.0 --port 8188 --force-fp16" >> launcher/run_colab.sh
+
+          echo "{}" > colab/comfyui_lab.ipynb
+
+      - name: Commit Level 2
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Level 2 Colab Lab Setup" || echo "No changes"
+          git push
