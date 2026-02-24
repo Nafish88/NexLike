@@ -1,0 +1,46 @@
+name: NexLike Level 3 - Cloudflare Colab Lab
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  level3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Create Notebook
+        run: |
+          mkdir -p colab
+
+          echo '{' > colab/comfyui_lab.ipynb
+          echo ' "cells": [' >> colab/comfyui_lab.ipynb
+
+          echo '  {"cell_type":"code","source":["!nvidia-smi"]},' >> colab/comfyui_lab.ipynb
+
+          echo '  {"cell_type":"code","source":["from google.colab import drive\n","drive.mount(\"/content/drive\")"]},' >> colab/comfyui_lab.ipynb
+
+          echo '  {"cell_type":"code","source":["!git clone https://github.com/comfyanonymous/ComfyUI.git\n","%cd ComfyUI\n","!pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118\n","!pip install xformers --no-build-isolation"]},' >> colab/comfyui_lab.ipynb
+
+          echo '  {"cell_type":"code","source":["!wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb\n","!dpkg -i cloudflared-linux-amd64.deb"]},' >> colab/comfyui_lab.ipynb
+
+          echo '  {"cell_type":"code","source":["!cloudflared tunnel --url http://127.0.0.1:8188 &\n","!python main.py --listen 0.0.0.0 --port 8188 --force-fp16"]}' >> colab/comfyui_lab.ipynb
+
+          echo ' ],' >> colab/comfyui_lab.ipynb
+          echo ' "metadata": {},' >> colab/comfyui_lab.ipynb
+          echo ' "nbformat": 4,' >> colab/comfyui_lab.ipynb
+          echo ' "nbformat_minor": 2' >> colab/comfyui_lab.ipynb
+          echo '}' >> colab/comfyui_lab.ipynb
+
+      - name: Commit Level 3
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Level 3 Cloudflare Lab Ready" || echo "No changes"
+          git push
