@@ -1,0 +1,35 @@
+name: NexLike Auto Bootstrap
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Create Project Structure
+        run: |
+          mkdir -p models workflows scripts
+          echo "# NexLike ComfyUI Lab" > README.md
+          echo "diffusers" > requirements.txt
+          echo "transformers" >> requirements.txt
+          echo "accelerate" >> requirements.txt
+          echo "safetensors" >> requirements.txt
+          echo "opencv-python" >> requirements.txt
+          echo "Pillow" >> requirements.txt
+          echo "numpy" >> requirements.txt
+          echo "einops" >> requirements.txt
+          echo "scipy" >> requirements.txt
+          echo "ComfyUI models go here" > models/put_models_here.txt
+
+      - name: Commit Changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Auto Bootstrap Setup" || echo "No changes to commit"
+          git push
