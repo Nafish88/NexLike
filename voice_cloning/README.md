@@ -23,3 +23,9 @@ This folder contains a beginner-friendly Google Colab notebook for cloning a voi
 - The first model load can take a few minutes because XTTS v2 weights are downloaded.
 - Keep input text short-to-medium during early tests for faster generation.
 - Use clear voice samples with minimal background noise for better results.
+
+## Dependency notes (Colab Latest / Python 3.12)
+- The notebook installs **PyTorch CUDA 11.8** wheels (`cu118`) for good T4 compatibility.
+- Dependency installation avoids strict `numpy` pinning to reduce resolver conflicts on Colab Latest.
+- XTTS v2 dependencies are installed with a simple, beginner-friendly setup flow in the notebook.
+
