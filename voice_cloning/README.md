@@ -1,3 +1,5 @@
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nafish88/NexLike/blob/main/voice_cloning/voice_clone_colab.ipynb)
+
 # Voice Cloning (Coqui XTTS v2) for Google Colab
 
 This folder contains a beginner-friendly Google Colab notebook for cloning a voice with **Coqui TTS (XTTS v2)** and generating `output.wav`.
