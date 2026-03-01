@@ -1,31 +1,84 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nafish88/NexLike/blob/main/voice_cloning/voice_clone_colab.ipynb)
 
-# Voice Cloning (Coqui XTTS v2) for Google Colab
+# Voice Cloning Setup (Hindi-First, XTTS v2)
 
-This folder contains a beginner-friendly Google Colab notebook for cloning a voice with **Coqui TTS (XTTS v2)** and generating `output.wav`.
+This folder now supports **two flows**:
+1. **Google Colab notebook** (quickest way)
+2. **Local Gradio app** (professional workflow with upload/text/play UI)
 
-## Files
-- `voice_clone_colab.ipynb` — main Colab notebook
-- `requirements.txt` — Python dependencies used by the notebook
+---
 
-## How to run in Google Colab
-1. Open `voice_clone_colab.ipynb` in Google Colab.
-2. In Colab, enable GPU:
-   - **Runtime → Change runtime type → Hardware accelerator → GPU**
-3. Run all cells from top to bottom.
-4. Upload a clean voice sample (recommended: `.wav`, 5–20 seconds).
-5. Edit `text_to_speak` and `language_code`.
-6. Run the generation cell.
-7. The notebook saves cloned audio as **`output.wav`** and offers download.
+## 1) Colab Flow (existing)
+Use `voice_clone_colab.ipynb` for one-click cloud usage.
 
-## Notes for stable free Colab usage
-- The notebook checks that GPU is enabled before generating speech.
-- The first model load can take a few minutes because XTTS v2 weights are downloaded.
-- Keep input text short-to-medium during early tests for faster generation.
-- Use clear voice samples with minimal background noise for better results.
+## 2) Local Python 3.12 Flow (new)
+Use `app.py` for a complete mini studio:
+- Voice upload (or record with mic)
+- Story text box
+- One-click generation
+- Output playback
+- Auto language detect (Hindi/Urdu/English fallback)
+- Basic professional audio quality checks (duration, clipping, low volume, low sample-rate)
 
-## Dependency notes (Colab Latest / Python 3.12)
-- The notebook installs **PyTorch CUDA 11.8** wheels (`cu118`) for good T4 compatibility.
-- Dependency installation avoids strict `numpy` pinning to reduce resolver conflicts on Colab Latest.
-- XTTS v2 dependencies are installed with a simple, beginner-friendly setup flow in the notebook.
+---
 
+## Recommended model
+For your requirement (Hindi-focused, cloning + natural TTS), best practical option is:
+
+- **Coqui XTTS v2** (`tts_models/multilingual/multi-dataset/xtts_v2`)
+
+Why:
+- strong multilingual support
+- stable one-shot cloning
+- works with short clean reference clips
+- good community support and docs
+
+---
+
+## Python 3.12 Setup
+
+### Step 1: Create environment
+```bash
+cd voice_cloning
+python3.12 -m venv .venv
+source .venv/bin/activate
+```
+
+### Step 2: Install dependencies
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### Step 3: Run app
+```bash
+python app.py
+```
+Open browser at `http://localhost:7860`.
+
+---
+
+## Best-practice input guide
+- Use **clean mono voice** sample
+- Duration: **6–20 seconds** ideal
+- Background noise minimal
+- Normal speaking pace
+- Avoid music + heavy reverb
+
+---
+
+## Feature checklist vs your plan
+- ✅ Voice upload
+- ✅ Story text box
+- ✅ Generate button
+- ✅ Play output voice
+- ✅ Auto language detect function
+- ✅ Professional quality warning checks
+- ✅ Python 3.12 friendly dependency set
+
+---
+
+## Notes
+- First run may take time because model weights download.
+- If GPU is available, generation speed improves significantly.
+- Long scripts should be generated in chunks for best stability.
