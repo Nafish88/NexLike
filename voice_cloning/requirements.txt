@@ -1,2 +1,6 @@
-TTS
+# Notebook helper dependencies for OpenVoice V2 Colab flow
+ipywidgets
 soundfile
+huggingface_hub
+requests
+melo-tts

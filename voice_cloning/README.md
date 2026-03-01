@@ -1,29 +1,37 @@
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nafish88/NexLike/blob/main/voice_cloning/voice_clone_colab.ipynb)
+[![Open In Colab (OpenVoice V2)](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nafish88/NexLike/blob/main/voice_cloning/voice_clone_openvoice.ipynb)
 
-# Hindi Voice Cloning TTS (XTTS v2) for Google Colab
+# Hindi Voice Cloning TTS for Google Colab
 
-A beginner-friendly, professional Google Colab notebook for **Hindi voice cloning** using **Coqui XTTS v2**.
+This folder contains beginner-friendly Colab notebooks for Hindi voice cloning.
 
-## Included Files
-- `voice_clone_colab.ipynb` — ready-to-run Colab notebook
-- `requirements.txt` — minimal Python dependencies (`TTS`, `soundfile`)
+## Included files
+- `voice_clone_openvoice.ipynb` — OpenVoice V2 (MIT licensed) Hindi voice-cloning notebook
+- `voice_clone_colab.ipynb` — XTTS v2 Hindi voice-cloning notebook
+- `requirements.txt` — helper Python packages used in the OpenVoice notebook
 
-## What the notebook does
-1. Installs PyTorch CUDA 11.8 wheels (T4-friendly) and minimal dependencies
-2. Detects GPU automatically and loads `tts_models/multilingual/multi-dataset/xtts_v2`
-3. Provides a simple UI with:
-   - `.wav` voice upload
-   - Hindi text input
+## OpenVoice V2 notebook features
+The `voice_clone_openvoice.ipynb` notebook:
+1. Installs PyTorch CUDA 11.8 wheels (`torch`, `torchvision`, `torchaudio`) in Colab
+2. Clones the official OpenVoice GitHub repo
+3. Installs repository dependencies from `OpenVoice/requirements.txt`
+4. Downloads OpenVoice V2 checkpoints from public sources (Hugging Face with S3 fallback)
+5. Detects GPU automatically and loads models
+6. Provides an `ipywidgets` UI with:
+   - `.wav` upload
+   - Hindi text box
    - Generate button
-   - Progress/status messages
+   - Status messages
    - Audio playback
-   - Download button for `output.wav`
+   - Download link for `output.wav`
 
-## Quick Start (Colab)
-1. Open the notebook in Google Colab.
-2. Enable GPU: **Runtime → Change runtime type → Hardware accelerator → GPU**.
-3. Run all cells from top to bottom.
+## Quick start (Google Colab)
+1. Open `voice_clone_openvoice.ipynb` in Colab.
+2. Set **Runtime → Change runtime type → GPU**.
+3. Run cells top-to-bottom.
 4. Upload a clean `.wav` sample (5–20 seconds recommended).
 5. Enter Hindi text and click **Generate output.wav**.
 
-Default language is set to `hi`.
+## Tips for better cloning quality
+- Use a clean, noise-free reference clip.
+- Keep reference voice in one speaker and one language/accent style.
+- Use short-to-medium sentences for first tests.
